@@ -1,41 +1,62 @@
 import java.util.Scanner;
 
 public class Calculator {
-    public static void main(String[] args){
+    public static void main(){
         Scanner sc = new Scanner(System.in);
         double a,b;
+        boolean keepgoing = true;
 
-        char operation = 'y';
+        char operation;
         do {
-            System.out.println("please enter two numbers.");
+            System.out.println("press 'q' at any stage to terminate the program.");
+            System.out.println("Enter the first number.");
             if (sc.hasNextDouble())
                  a = sc.nextDouble();
             else{
-            System.out.println("please enter valid input.");
-            sc.next();
-            continue;
+                char ch = sc.next().charAt(0);
+                if (ch == 'q' || ch == 'Q') {
+                    System.out.println("Exiting program...");
+                    keepgoing = false;
+                    continue;
+                } else {
+                    System.out.println("please enter valid input.");
+                    sc.nextLine();  // clear the rest of the line
+                    continue;
+                }
+
             }
+
+            System.out.println("Enter the second number.");
             if (sc.hasNextDouble())
                 b = sc.nextDouble();
             else{
-                System.out.println("please enter valid input.");
-                sc.next();
-                continue;
+                char ch = sc.next().charAt(0);
+                if (ch == 'q' || ch == 'Q') {
+                    System.out.println("Exiting program...");
+                    keepgoing = false;
+                    continue;
+                } else {
+                    System.out.println("please enter valid input.");
+                    sc.nextLine();  // clear the rest of the line
+                    continue;
+                }
+
             }
-            System.out.println("please choose the operation to perform -: +, -, *, / ('q' to exit): ");
+            System.out.println("please choose the operation to perform -: +, -, *, /, ^  ('q' to exit): ");
             operation = sc.next().charAt(0);
             switch (operation){
                 case '+' -> add(a,b);
                 case '-' -> subtract(a,b);
                 case '*' -> mul(a,b);
                 case '/' -> divide(a,b);
-                case 'q','Q' -> {
-                    operation = 'q';
-                    continue;
+                case 'q','Q' ->{
+                    System.out.println("Exiting program...");
+                    keepgoing = false;
                 }
+                case '^' -> System.out.println(Math.pow(a,b));
                 default -> System.out.println("Invalid Operation. Either choose again or press 'q' to exit.");
             }
-        } while (operation != 'q');
+        } while (keepgoing);
 
 
 
@@ -60,5 +81,6 @@ public class Calculator {
         }
         System.out.println("divide: "+(a/b));
     }
+
 
 }
