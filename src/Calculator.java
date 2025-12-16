@@ -48,12 +48,13 @@ public class Calculator {
                 case '+' -> add(a,b);
                 case '-' -> subtract(a,b);
                 case '*' -> mul(a,b);
+
                 case '/' -> divide(a,b);
                 case 'q','Q' ->{
                     System.out.println("Exiting program...");
                     keepgoing = false;
                 }
-                case '^' -> System.out.println(Math.pow(a,b));
+                case '^' -> power(a,b);
                 default -> System.out.println("Invalid Operation. Either choose again or press 'q' to exit.");
             }
         } while (keepgoing);
@@ -72,6 +73,9 @@ public class Calculator {
 
     static void mul(double a, double b){
         System.out.println("multiply : "+ (a*b));
+    }
+    static void power(double a, double b){
+        System.out.println("a to the power of b is: "+ Math.pow(a,b));
     }
 
     static void divide(double a, double b) {
